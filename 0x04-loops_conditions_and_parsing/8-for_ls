@@ -1,13 +1,8 @@
 #!/usr/bin/env bash
 # print all files in pwd
 
-for file in *
+LIST=$(ls)
+for i in $LIST;
 do
-	if [[ "$file" =~ ^[0-9]+- ]]
-	then
-		name_after_dash=$(echo "$file" | cut -d'-' -f2-)
-		echo "$name_after_dash"
-	else
-		echo "$file"
-	fi
+	echo "$i" | cut -d '-' -f2
 done
