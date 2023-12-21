@@ -7,10 +7,9 @@ do
 	if [ $x -eq 9 ]
 	then
 		echo "Hi"
-	fi
-	if [ $x -ne 9 ]
-	then
+	else
 		echo "Best School"
 	fi
-	x=$(( x + 1 ))
+
+	((x++))
 done
