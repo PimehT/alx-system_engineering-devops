@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+# display hour and minutes of a day
+
+hr=0
+while [ $hr -lt 13 ]
+do
+	echo "Hour: $hr"
+	minute=1
+	while [ $minute -lt 60 ]
+	do
+		echo $minute
+		((minute++))
+	done
+	((hr++))
+done
