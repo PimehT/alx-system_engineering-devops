@@ -8,6 +8,9 @@ do
 	then
 		echo "Hi"
 	fi
-	echo "Best School"
+	if [ $x -ne 9 ]
+	then
+		echo "Best School"
+	fi
 	x=$(( x + 1 ))
 done
