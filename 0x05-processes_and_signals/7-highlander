@@ -3,11 +3,7 @@
 
 while true
 do
-	if [ "$SIGTERM" ]
-	then
-		echo "I am invincible!!!"
-	else
-		echo "To infinity and beyond"
-	fi
+	trap "I am invincible!!!" SIGTERM
+	echo "To infinity and beyond"
 	sleep 2
 done
