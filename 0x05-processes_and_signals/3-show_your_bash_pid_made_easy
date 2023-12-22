@@ -1,4 +1,4 @@
-#!/bin/env bash
+#!/usr/bin/env bash
 # Get the current script's PID
 
 pgrep -l "bash"
