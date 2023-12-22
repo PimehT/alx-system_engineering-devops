@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+# kills 7-highlander despite it having Trap
+
+pid_7=$(pgrep -f '7-highlander')
+kill -s SIGKILL "$pid_7"
