@@ -3,9 +3,16 @@
 
 echo $$ > /var/run/myscript.pid
 
-trap 'echo "I hate the kill command"' SIGTERM
+clean()
+{
+	echo "I hate the kill command"
+	rm /var/run/myscript.pid
+	exit 0
+}
+
+trap 'clean' SIGTERM
 trap 'echo "Y U no love me?!"' SIGINT
-trap 'rm /var/run/myscript.pid' SIGQUIT SIGTERM
+trap 'rm /var/run/myscript.pid' SIGQUIT
 
 while true
 do
