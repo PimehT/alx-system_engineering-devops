@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+# Create a RSA key pair
+# -t to set the type of key (case: RSA)
+# -f to set name of the file of the key
+# -b to set the number of bits in the key (in this case: 4096)
+# -N to set the passphrase
+ssh-keygen -t rsa -f school -b 4096 -N betty
