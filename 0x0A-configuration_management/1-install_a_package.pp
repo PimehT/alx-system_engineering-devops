@@ -1,5 +1,4 @@
-# Use puppet to install the software package Flask
-# version 2.1.0 from pip3
+# Use puppet to install the software package Flask 2.1.0 from pip3
 
 package { 'flask':
   ensure   => '2.1.0',
