@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+# write a script to install nginx on server web-01
+#+ listening on port 80
+
+# installation
+apt-get update
+apt-get install -y nginx
+
+# file creation
+mkdir /etc/nginx/html
+echo "Hello World!" > /etc/nginx/html/index.html
+
+# start nginx
+service start nginx
+
+# configuration
+sed -i '/listen 80 default_server;/ a \\tserver_name _;' /etc/nginx/sites-available/default
+
+# restart nginx
+service restart nginx
