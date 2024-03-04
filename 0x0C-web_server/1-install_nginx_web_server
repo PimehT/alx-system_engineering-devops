@@ -14,7 +14,15 @@ echo "Hello World!" > /etc/nginx/html/index.html
 service nginx start
 
 # configuration
-sed -i '/listen 80 default_server;/ a \\t7136-web-01 _;' /etc/nginx/sites-available/default
+sudo bash -c 'echo "server {
+    listen 80;
+    server_name _;
+
+    location / {
+        root /etc/nginx/html;
+        index index.html;
+    }
+}" > /etc/nginx/sites-available/default'
 
 # restart nginx
 service nginx restart
