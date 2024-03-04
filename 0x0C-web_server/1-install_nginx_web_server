@@ -10,9 +10,6 @@ apt-get install -y nginx
 mkdir /etc/nginx/html
 echo "Hello World!" > /etc/nginx/html/index.html
 
-# start nginx
-service nginx start
-
 # configuration
 sudo bash -c 'echo "server {
     listen 80;
