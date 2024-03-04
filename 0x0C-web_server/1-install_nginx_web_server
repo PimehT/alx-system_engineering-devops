@@ -8,6 +8,7 @@ apt-get install -y nginx
 
 # file creation
 mkdir /etc/nginx/html
+touch /etc/nginx/html/index.html
 echo "Hello World!" > /etc/nginx/html/index.html
 
 # configuration
