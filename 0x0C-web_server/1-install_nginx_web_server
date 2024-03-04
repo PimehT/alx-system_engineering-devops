@@ -8,16 +8,15 @@ apt-get install -y nginx
 
 # file creation
 mkdir /etc/nginx/html
-touch /etc/nginx/html/index.html
 echo "Hello World!" > /etc/nginx/html/index.html
 
 # configuration
-sudo bash -c 'echo "server {
+printf %s "server {
     listen    80 default_server;
     listen    [::]:80 default_server;
     root      /etc/nginx/html;
     index     index.html index.htm;
-}" > /etc/nginx/sites-available/default'
+}" > /etc/nginx/sites-available/default
 
 # restart nginx
 service nginx restart
