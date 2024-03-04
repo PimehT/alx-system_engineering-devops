@@ -11,7 +11,7 @@ echo "Hello World!" | sudo tee /var/www/html/index.html > /dev/null
 
 # Replace the default Nginx configuration to listen on port 80
 sudo bash -c 'echo "server {
-    listen :80;
+    listen 80;
     server_name _;
 
     location / {
