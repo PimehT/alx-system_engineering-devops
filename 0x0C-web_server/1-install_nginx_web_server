@@ -7,16 +7,18 @@ apt-get update
 apt-get install -y nginx
 
 # file creation
-mkdir /etc/nginx/html
-echo "Hello World!" > /etc/nginx/html/index.html
+echo "Hello World!" | sudo tee /var/www/html/index.html > /dev/null
 
-# configuration
-printf %s "server {
-    listen    80 default_server;
-    listen    [::]:80 default_server;
-    root      /etc/nginx/html;
-    index     index.html index.htm;
-}" > /etc/nginx/sites-available/default
+# Replace the default Nginx configuration to listen on port 80
+sudo bash -c 'echo "server {
+    listen 80;
+    server_name _;
 
-# restart nginx
+    location / {
+        root /var/www/html;
+        index index.html;
+    }
+}" > /etc/nginx/sites-available/default'
+
+# Restart Nginx
 service nginx restart
