@@ -12,13 +12,10 @@ echo "Hello World!" > /etc/nginx/html/index.html
 
 # configuration
 sudo bash -c 'echo "server {
-    listen 80;
-    server_name _;
-
-    location / {
-        root /etc/nginx/html;
-        index index.html;
-    }
+    listen    80 default_server;
+    listen    [::]:80 default_server;
+    root      /etc/nginx/html;
+    index     index.html index.htm;
 }" > /etc/nginx/sites-available/default'
 
 # restart nginx
