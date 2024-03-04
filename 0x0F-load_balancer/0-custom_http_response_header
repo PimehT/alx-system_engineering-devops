@@ -5,7 +5,7 @@
 apt-get -y update
 apt-get -y install nginx
 ufw allow 'Nginx HTTP'
-echo 'Hello World!' > /var/www/html/index.html
+echo 'Hello World!' > /var/www/html/index.nginx-debian.html
 
 custom_header="add_header X-Served-By \"$HOSTNAME\";"
 
@@ -14,4 +14,4 @@ then
     sudo sed -i "/http {/a \\\t$custom_header" /etc/nginx/nginx.conf
 fi
 
-service nginx restart
+sudo service nginx restart
