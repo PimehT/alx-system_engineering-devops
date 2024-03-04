@@ -1,22 +1,7 @@
 #!/usr/bin/env bash
-# write a script to install nginx on server web-01
-#+ listening on port 80
-
-# installation
-apt-get update
-apt-get install -y nginx
-
-# file creation
-mkdir /etc/nginx/html
-echo "Hello World!" > /etc/nginx/html/index.html
-
-# Replace the default Nginx configuration to listen on port 80
-printf %s "server {
-	listen    80 default_server;
-	listen    [::]:80 default_server;
-	root      /etc/nginx/html;
-	index     index.html index.htm;
-}
-" > /etc/nginx/sites-available/default
-
-service nginx restart
+# script to install and setup nginx
+apt-get -y update
+apt-get -y upgrade
+apt-get -y install nginx
+service nginx start
+echo "Hello World!" > /var/www/html/index.nginx-debian.html
