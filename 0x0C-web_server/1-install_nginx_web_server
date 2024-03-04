@@ -2,23 +2,8 @@
 # write a script to install nginx on server web-01
 #+ listening on port 80
 
-# installation
-apt-get update -y
-apt-get install -y nginx
-
-# file creation
-echo "Hello World!" > /var/www/html/index.html
-
-# Replace the default Nginx configuration to listen on port 80
-echo "server {
-    listen 80;
-    server_name _;
-
-    location / {
-        root /var/www/html;
-        index index.html;
-    }
-}" > /etc/nginx/sites-available/default
-
-# Restart Nginx
-service nginx restart
+apt-get -y update
+apt-get -y install nginx
+ufw allow 'Nginx HTTP'
+echo 'Hello World!' > /var/www/html/index.nginx-debian.html
+service nginx start
