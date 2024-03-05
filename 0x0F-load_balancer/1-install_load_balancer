@@ -3,46 +3,13 @@
 #+ between web-01 and web-02 servers
 
 # installation
-apt-get install --no-install-recommends software-properties-common
-add-apt-repository ppa:vbernat/haproxy-2.4
-
-Configure HAproxy so that it send traffic to web-01 and web-02
-Distribute requests using a roundrobin algorithm
-Make sure that HAproxy can be managed via an init script
-Make sure that your servers are configured with the right hostnames: [STUDENT_ID]-web-01 and [STUDENT_ID]-web-02. If not, follow this tutorial.
-For your answer file, write a Bash script that configures a new Ubuntu machine to respect above requirements
-Example:
-
-sylvain@ubuntu$ curl -Is 54.210.47.110
-HTTP/1.1 200 OK
-Server: nginx/1.4.6 (Ubuntu)
-Date: Mon, 27 Feb 2017 06:12:17 GMT
-Content-Type: text/html
-Content-Length: 30
-Last-Modified: Tue, 21 Feb 2017 07:21:32 GMT
-Connection: keep-alive
-ETag: "58abea7c-1e"
-X-Served-By: 03-web-01
-Accept-Ranges: bytes
-
-sylvain@ubuntu$ curl -Is 54.210.47.110
-HTTP/1.1 200 OK
-Server: nginx/1.4.6 (Ubuntu)
-Date: Mon, 27 Feb 2017 06:12:19 GMT
-Content-Type: text/html
-Content-Length: 612
-Last-Modified: Tue, 04 Mar 2014 11:46:45 GMT
-Connection: keep-alive
-ETag: "5315bd25-264"
-X-Served-By: 03-web-02
-Accept-Ranges: bytes
-
-sylvain@ubuntu$
+apt-get -y update
+apt-get -y install haproxy
 
 # configuration
 DOMAIN_NAME='onepimeht.tech'
  
-echo 'backend $DOMAIN_NAME-servers
+echo "backend $DOMAIN_NAME-servers
     balance roundrobin
     mode http
     server 7136-web-01 100.26.213.55:80 check
@@ -52,6 +19,6 @@ frontend $DOMAIN_NAME-in
     bind *:80
     mode http
     default_backend $DOMAIN_NAME-servers
-' >> /etc/haproxy/haproxy.cfg
+" >> /etc/haproxy/haproxy.cfg
 
 sudo service haproxy start
