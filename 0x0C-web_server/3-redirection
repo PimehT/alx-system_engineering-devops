@@ -4,15 +4,16 @@
 
 ./1-install_nginx_web_server
 
-read -r -d '' redirect_rule <<'EOF'
+read -r -d '' REDIRECT_RULE <<'EOF'
 location /redirect_me/ {
     return 301 https://www.youtube.com/watch?v=QH2-TGUlwu4;
 }
 EOF
 
-if [ -f /etc/nginx/sites-available/default ]; then
+NGINX_CONFIG="/etc/nginx/sites-available/default"
+if [ -f "$NGINX_CONFIG" ]; then
     cp /etc/nginx/sites-available/default /etc/nginx/sites-available/default.bak
-    awk -v r="$redirect_rule" '/server_name _;/ {print; print r; next} 1' /etc/nginx/sites-available/default > /etc/nginx/sites-available/default.tmp && mv /etc/nginx/sites-available/default.tmp /etc/nginx/sites-available/default
+    echo "$REDIRECT_RULE" >> "$NGINX_CONFIG"
 else
     echo "Default server block configuration file not found"
     exit 1
