@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+# first debugging series to get Hello Holberton from querying root
+sed -i '1iServerName localhost' /etc/apache2/ports.conf
+service apache2 start
+sed -i '/DocumentRoot \/var\/www\/html/a DirectoryIndex index.html' /etc/apache2/sites-available/000-default.conf
+service apache2 restart
+
