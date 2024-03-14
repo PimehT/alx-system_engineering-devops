@@ -1,3 +1,4 @@
 #!/usr/bin/env bash
 # first debugging series to get Hello Holberton from querying root
-sudo service apache2 restart
+sed -i '1iServerName localhost' /etc/apache2/ports.conf
+sudo service apache2 start
