@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+# setup nginx in container to listen at port 80 and make sure it is installed properly
+sed -i "s/8080/80/g" /etc/nginx/sites-enabled/default
+service nginx restart
+echo "" > /run/nginx.pid
