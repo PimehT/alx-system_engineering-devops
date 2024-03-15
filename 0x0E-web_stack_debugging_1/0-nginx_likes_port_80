@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
 # setup nginx in container to listen and make sure it is installed properly
-
-apt-get update
-apt-get install -y nginx
-apt install curl
-service nginx start
+rm -rf /etc/nginx/sites-enabled/default
+ln -s /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
+service nginx restart
