@@ -3,4 +3,5 @@
 
 apt-get update
 apt-get install -y nginx
+apt install curl
 service nginx start
