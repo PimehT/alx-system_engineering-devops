@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+# configures the container to be running as nginx user
+#+ listening on all active IPs on port 8080
+
+# Create the nginx user if it doesn't exist
+if ! id -u nginx >/dev/null 2>&1; then
+    useradd -r nginx
+fi
+
+# Modify the nginx configuration to run as the nginx user and listen on port 8080
+sed -i 's/user .*/user nginx;/' /etc/nginx/nginx.conf
+sed -i 's/listen .*/listen 8080;/' /etc/nginx/sites-available/default
+
+# Restart Nginx to apply the changes
+service nginx restart
+
