@@ -1,7 +1,7 @@
-#!/usr/bin/python3
+#!/usr/bin/python3``
 """
 using this REST API, for a given employee ID,
-returns information about his/her TODO list progress.
+returns information about his/her TO_DO list progress.
 """
 
 import requests
@@ -20,4 +20,4 @@ if __name__ == "__main__":
     completed = [task for task in todos if task.get('completed') is True]
     print("Employee {} is done with tasks({}/{}):".format(
         user.get('name'), len(completed), len(todos)))
-    [print("     {}".format(task.get('title'))) for task in completed]
+    [print("\t {}".format(task.get('title'))) for task in completed]
