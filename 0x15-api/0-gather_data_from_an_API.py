@@ -8,8 +8,10 @@ import requests
 from sys import argv
 
 
-if __name__ == "__main__":
-    user_id = int(argv[1])
+def gather_data(user_id):
+    """
+    Gather data from an API endpoint.
+    """
     url = 'https://jsonplaceholder.typicode.com/users/{}'.format(user_id)
     response = requests.get(url)
     user = response.json()
@@ -21,3 +23,8 @@ if __name__ == "__main__":
     print("Employee {} is done with tasks({}/{}):".format(
         user.get('name'), len(completed), len(todos)))
     [print("\t {}".format(task.get('title'))) for task in completed]
+
+
+if __name__ == "__main__":
+    user_id = int(argv[1])
+    gather_data(user_id)
