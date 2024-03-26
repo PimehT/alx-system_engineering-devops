@@ -27,9 +27,9 @@ def export_to_json(user_id, todos):
 
 if __name__ == "__main__":
     user_id = int(argv[1])
-    url = 'https://jsonplaceholder.typicode.com/users/{}'.format(user_id)
-    user = requests.get(url).json()
-    url = 'https://jsonplaceholder.typicode.com/todos?userId={}'.format(
+    user_url = 'https://jsonplaceholder.typicode.com/users/{}'.format(user_id)
+    user = requests.get(user_url).json()
+    todos_url = 'https://jsonplaceholder.typicode.com/todos?userId={}'.format(
         user_id)
-    todos = requests.get(url).json()
+    todos = requests.get(todos_url).json()
     export_to_json(user_id, todos)
