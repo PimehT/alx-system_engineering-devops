@@ -3,6 +3,7 @@
 returns information about his/her TO_DO list progress.
 """
 import csv
+import re
 import requests
 from sys import argv
 
@@ -18,14 +19,18 @@ def export_to_csv(user_id, todos):
             "USER_ID", "USERNAME", "TASK_COMPLETED_STATUS", "TASK_TITLE"])
         for task in todos:
             csv_writer.writerow([
-                user_id, user.get('username'), task.get('completed'), task.get('title')])
+                user_id, user.get(
+                    'username'), task.get('completed'), task.get('title')])
 
 
 if __name__ == "__main__":
-    user_id = int(argv[1])
-    url = 'https://jsonplaceholder.typicode.com/users/{}'.format(user_id)
-    user = requests.get(url).json()
-    url = 'https://jsonplaceholder.typicode.com/todos?userId={}'.format(
-        user_id)
-    todos = requests.get(url).json()
-    export_to_csv(user_id, todos)
+    url = 'https://jsonplaceholder.typicode.com'
+    if re.fullmatch(r'\d+', argv[1]):
+        user_id = int(argv[1])
+        user = requests.get(f'{url}/users/{user_id}').json()
+        user_name = user.get('name')
+        todos = requests.get(f'{url}/todos').json()
+        user_todos = [task for task in todos if task.get('userId') == user_id]
+        completed = [task for task in user_todos
+                     if task.get('completed') is True]
+        export_to_csv(user_id, user_todos)
