@@ -1,6 +1,7 @@
 #!/usr/bin/python3``
 """
 returns information about his/her TO_DO list progress.
+export data in the CSV format.
 """
 import re
 import requests
@@ -15,8 +16,8 @@ if __name__ == "__main__":
         user_name = user.get('username')
         todos = requests.get(f'{url}/todos').json()
         user_todos = [task for task in todos if task.get('userId') == user_id]
-        file_name = f"{user_id}.csv"
-        with open(file_name, 'w') as file:
+
+        with open(f'{user_id}.csv', 'w') as file:
             for task in user_todos:
                 task_title = task.get('title')
                 task_status = task.get('completed')
