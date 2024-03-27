@@ -2,23 +2,9 @@
 """
 returns information about his/her TO_DO list progress.
 """
-import csv
 import re
 import requests
 from sys import argv
-
-
-def export_to_csv(user_id, todos):
-    """
-    Exports the given todos to a CSV file named after the user_id.
-    """
-    file_name = f"{user_id}.csv"
-    with open(file_name, 'w', newline='') as csvfile:
-        csv_writer = csv.writer(csvfile, quoting=csv.QUOTE_ALL)
-        for task in todos:
-            csv_writer.writerow([
-                user_id, user.get('username'),
-                str(task.get('completed')), task.get('title')])
 
 
 if __name__ == "__main__":
@@ -29,6 +15,11 @@ if __name__ == "__main__":
         user_name = user.get('name')
         todos = requests.get(f'{url}/todos').json()
         user_todos = [task for task in todos if task.get('userId') == user_id]
-        completed = [task for task in user_todos
-                     if task.get('completed') is True]
-        export_to_csv(user_id, user_todos)
+        file_name = f"{user_id}.csv"
+        with open(file_name, 'w') as file:
+            for task in user_todos:
+                task_title = task.get('title')
+                task_status = task.get('completed')
+                file.write('"{}","{}","{}","{}"\n'.format(
+                    user_id, user_name, task_status, task_title
+                ))
