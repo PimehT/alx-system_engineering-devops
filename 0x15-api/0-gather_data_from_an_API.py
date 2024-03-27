@@ -11,11 +11,11 @@ if __name__ == "__main__":
     url = 'https://jsonplaceholder.typicode.com'
     if re.fullmatch(r'\d+', argv[1]):
         user_id = int(argv[1])
-    user = requests.get(f'{url}/users/{user_id}').json()
-    user_name = user.get('name')
-    todos = requests.get(f'{url}/todos?userId={user_id}').json()
-    completed = [task for task in todos if task.get('completed') is True]
-    print("Employee {} is done with tasks({}/{}):".format(
-        user_name, len(completed), len(todos)))
-    for task in completed:
-        print("\t {}".format(task.get('title')))
+        user = requests.get(f'{url}/users/{user_id}').json()
+        user_name = user.get('name')
+        todos = requests.get(f'{url}/todos?userId={user_id}').json()
+        completed = [task for task in todos if task.get('completed') is True]
+        print("Employee {} is done with tasks({}/{}):".format(
+            user_name, len(completed), len(todos)))
+        for task in completed:
+            print("\t {}".format(task.get('title')))
