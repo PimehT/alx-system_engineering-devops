@@ -14,13 +14,11 @@ def export_to_csv(user_id, todos):
     """
     file_name = f"{user_id}.csv"
     with open(file_name, 'w', newline='') as csvfile:
-        csv_writer = csv.writer(csvfile)
-        csv_writer.writerow([
-            "USER_ID", "USERNAME", "TASK_COMPLETED_STATUS", "TASK_TITLE"])
+        csv_writer = csv.writer(csvfile, quoting=csv.QUOTE_ALL)
         for task in todos:
             csv_writer.writerow([
-                user_id, user.get(
-                    'username'), task.get('completed'), task.get('title')])
+                user_id, user.get('username'),
+                str(task.get('completed')), task.get('title')])
 
 
 if __name__ == "__main__":
