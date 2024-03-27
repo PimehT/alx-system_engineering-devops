@@ -14,6 +14,7 @@ if __name__ == "__main__":
         user_id = int(argv[1])
         user = requests.get(f'{url}/users/{user_id}').json()
         todos = requests.get(f'{url}/todos').json()
+
         user_name = user.get('username')
         user_todos = [task for task in todos if task.get('userId') == id]
 
