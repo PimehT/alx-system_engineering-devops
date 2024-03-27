@@ -1,4 +1,3 @@
-#!/usr/bin/python3``
 """
 returns information about his/her TO_DO list progress.
 """
