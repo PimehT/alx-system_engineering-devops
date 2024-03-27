@@ -13,11 +13,11 @@ if __name__ == "__main__":
     if re.fullmatch(r'\d+', argv[1]):
         id = int(argv[1])
 
-        usr_json = requests.get(f'{url}/users/{id}').json()
-        todos_json = requests.get(f'{url}/todos').json()
+        user = requests.get(f'{url}/users/{id}').json()
+        todos = requests.get(f'{url}/todos').json()
 
-        user_name = usr_json.get('username')
-        usr_todos = [task for task in todos_json if task.get('userId') == id]
+        user_name = user.get('username')
+        usr_todos = [task for task in todos if task.get('userId') == id]
 
         with open(f'{id}.csv', 'w') as file:
             for task in usr_todos:
