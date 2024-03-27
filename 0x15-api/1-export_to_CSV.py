@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 """
-returns information about his/her TO_DO list progress.
-export data in the CSV format.
+returns export data in the CSV format of
+information about his/her TO_DO list progress.
 """
 import re
 import requests
@@ -12,7 +12,6 @@ if __name__ == "__main__":
     url = "https://jsonplaceholder.typicode.com"
     if re.fullmatch(r'\d+', argv[1]):
         user_id = int(argv[1])
-
         user = requests.get(f'{url}/users/{user_id}').json()
         todos = requests.get(f'{url}/todos').json()
         user_name = user.get('username')
