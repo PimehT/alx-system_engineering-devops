@@ -12,7 +12,7 @@ if __name__ == "__main__":
     if re.fullmatch(r'\d+', argv[1]):
         user_id = int(argv[1])
         user = requests.get(f'{url}/users/{user_id}').json()
-        user_name = user.get('name')
+        user_name = user.get('username')
         todos = requests.get(f'{url}/todos').json()
         user_todos = [task for task in todos if task.get('userId') == user_id]
         file_name = f"{user_id}.csv"
