@@ -23,4 +23,5 @@ if __name__ == "__main__":
                 task_status = task.get('completed')
                 file.write('"{}","{}","{}","{}"\n'.format(
                     user_id, user_name, task_status, task_title
-                ))
+                )
+                           )
