@@ -1,4 +1,8 @@
 #!/usr/bin/python3
+"""
+returns information about all todo of users.
+export data to a JSON file.
+"""
 import requests
 import json
 
