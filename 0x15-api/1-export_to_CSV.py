@@ -17,10 +17,10 @@ if __name__ == "__main__":
         todos = requests.get(f'{url}/todos').json()
 
         user_name = user.get('username')
-        usr_todos = [task for task in todos if task.get('userId') == id]
+        user_todos = [task for task in todos if task.get('userId') == id]
 
         with open(f'{id}.csv', 'w') as file:
-            for task in usr_todos:
+            for task in user_todos:
                 task_status = task.get('completed')
                 task_title = task.get('title')
                 file.write('"{}","{}","{}","{}"\n'.format(
