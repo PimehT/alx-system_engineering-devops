@@ -13,13 +13,15 @@ if __name__ == "__main__":
     if re.fullmatch(r'\d+', argv[1]):
         id = int(argv[1])
 
-        user = requests.get(f'{url}/users/{id}').json()
+        users = requests.get(f'{url}/users').json()
         todos = requests.get(f'{url}/todos').json()
 
-        with open(f'todo_all_employees.json', 'w') as file:
+        todo_dict = {}
+        for user in users:
+            user_id = user.get('id')
             user_name = user.get('username')
-            json.dump({id: [{
-                "username": user_name,
-                "task": task.get('title'),
-                "completed": task.get('completed')
-            } for task in todos]}, file)
+            user_tasks = [{"username": user_name, "task": task.get('title'), "completed": task.get('completed')} for task in todos if task.get('userId') == user_id]
+            todo_dict[user_id] = user_tasks
+
+        with open('todo_all_employees.json', 'w') as file:
+            json.dump(todo_dict, file)
