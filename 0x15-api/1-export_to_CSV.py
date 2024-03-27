@@ -1,7 +1,7 @@
-#!/usr/bin/python3``
-"""
-returns information about his/her TO_DO list progress.
-export data in the CSV format.
+#!/usr/bin/python3
+"""script that, using this REST API, for a given employee ID,
+returns information about his/her TODO list progress
+then export the data in the CSV format
 """
 import re
 import requests
@@ -9,19 +9,24 @@ from sys import argv
 
 
 if __name__ == "__main__":
-    url = 'https://jsonplaceholder.typicode.com'
+    API = "https://jsonplaceholder.typicode.com"
     if re.fullmatch(r'\d+', argv[1]):
-        user_id = int(argv[1])
-        user = requests.get(f'{url}/users/{user_id}').json()
-        user_name = user.get('username')
-        todos = requests.get(f'{url}/todos').json()
-        user_todos = [task for task in todos if task.get('userId') == user_id]
+        id = int(argv[1])
 
-        with open(f'{user_id}.csv', 'w') as file:
-            for task in user_todos:
-                task_title = task.get('title')
+        usr_json = requests.get(f'{API}/users/{id}').json()
+        todos_json = requests.get(f'{API}/todos').json()
+
+        user_name = usr_json.get('username')
+        usr_todos = [task for task in todos_json if task.get('userId') == id]
+
+        with open(f'{id}.csv', 'w') as file:
+            for task in usr_todos:
                 task_status = task.get('completed')
+                task_title = task.get('title')
                 file.write('"{}","{}","{}","{}"\n'.format(
-                    user_id, user_name, task_status, task_title
-                )
+                                                        id,
+                                                        user_name,
+                                                        task_status,
+                                                        task_title
+                                                        )
                            )
