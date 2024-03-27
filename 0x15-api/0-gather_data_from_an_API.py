@@ -15,7 +15,8 @@ if __name__ == "__main__":
         user_name = user.get('name')
         todos = requests.get(f'{url}/todos').json()
         user_todos = [task for task in todos if task.get('userId') == user_id]
-        completed = [task for task in user_todos if task.get('completed') is True]
+        completed = [task for task in user_todos
+                     if task.get('completed') is True]
         print("Employee {} is done with tasks({}/{}):".format(
             user_name, len(completed), len(user_todos)
         ))
