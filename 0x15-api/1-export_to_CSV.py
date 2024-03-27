@@ -9,12 +9,12 @@ from sys import argv
 
 
 if __name__ == "__main__":
-    url = "https://jsonplaceholder.typicode.com"
+    API = "https://jsonplaceholder.typicode.com"
     if re.fullmatch(r'\d+', argv[1]):
         user_id = int(argv[1])
 
-        user = requests.get(f'{url}/users/{user_id}').json()
-        todos = requests.get(f'{url}/todos').json()
+        user = requests.get(f'{API}/users/{user_id}').json()
+        todos = requests.get(f'{API}/todos').json()
         user_name = user.get('username')
         user_todos = [task for task in todos if task.get('userId') == id]
 
