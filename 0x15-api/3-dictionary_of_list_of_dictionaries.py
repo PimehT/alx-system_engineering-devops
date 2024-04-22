@@ -8,19 +8,18 @@ import requests
 
 
 if __name__ == "__main__":
-    url = "https://jsonplaceholder.typicode.com"
-    users = requests.get(f'{url}/users').json()
-    formatted_data = {}
+    url = 'https://jsonplaceholder.typicode.com/'
+    users = requests.get(f'{url}users/').json()
+    todos = requests.get(f'{url}todos/').json()
+    tasks = [todo for todo in todos if todo.get('userId') == int(id)]
+
+    json_data = {}
     for user in users:
-        user_id = user['id']
-        user_name = user['username']
-        todos = requests.get(f'{url}/todos').json()
-        user_todos = [task for task in todos if task.get('userId') == user_id]
-        formatted_todos = [{
-            "username": user_name,
-            "task": task.get('title'),
-            "completed": task.get('completed')
-        } for task in user_todos]
-        formatted_data[user_id] = formatted_todos
+        id = user.get('id')
+        data = [{'username': user.get('username'),
+                'task': task.get('title'),
+                'completed': task.get('completed')} for task in todos
+                if todos.get('userId') == id]
+        json_data[id] = data
     with open('todo_all_employees.json', 'w') as file:
-        json.dump(formatted_data, file, indent=4)
+        json.dump(json_data, file, indent=4)
