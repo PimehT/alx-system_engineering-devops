@@ -16,10 +16,11 @@ if __name__ == "__main__":
     json_data = {}
     for user in users:
         id = user.get('id')
-        data = [{'username': user.get('username'),
-                'task': task.get('title'),
-                'completed': task.get('completed')} for task in todos
-                if todos.get('userId') == id]
+        data = [{
+            'username': user.get('username'),
+            'task': task.get('title'),
+            'completed': task.get('completed')}
+            for task in todos if todos.get('userId') == id]
         json_data[id] = data
     with open('todo_all_employees.json', 'w') as file:
         json.dump(json_data, file, indent=4)
