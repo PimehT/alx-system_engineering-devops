@@ -21,5 +21,5 @@ if __name__ == "__main__":
             json.dump({id: [{
                 "task": task.get('title'),
                 "completed": task.get('completed'),
-                "username": user.get('name'),
+                "username": user.get('username'),
             } for task in tasks]}, file)
