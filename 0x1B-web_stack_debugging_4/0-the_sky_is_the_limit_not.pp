@@ -7,4 +7,4 @@ exec { 'Restart nginx':
   command => 'service nginx restart',
   path    => ['/usr/bin', '/bin'],
   require => Exec['Update ulimit in nginx default config'],
-} 
+}
